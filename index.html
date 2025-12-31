@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mansi & Me ❤️</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Outfit:wght@300;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: "#050505", 
+                        dark: "#121212",
+                        gold: "#FFD700",
+                        moon: "#E0E0E0",
+                        lovepink: "#FF1493",
+                        mansiblue: "#4dccff",
+                    },
+                    fontFamily: {
+                        hand: ["Caveat", "cursive"], 
+                        clean: ["Outfit", "sans-serif"], 
+                        bold: ["Poppins", "sans-serif"], 
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'slide-up': 'slideUp 1s ease-out forwards',
+                        'pop-in': 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'heartbeat': 'heartbeat 1.5s ease-in-out infinite',
+                        'float-heart': 'floatHeart 15s linear infinite',
+                        'twinkle': 'twinkle 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        popIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.5)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        heartbeat: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                        },
+                        floatHeart: {
+                            '0%': { transform: 'translateY(100vh) rotate(0deg)', opacity: 0 },
+                            '10%': { opacity: 0.7 },
+                            '90%': { opacity: 0.7 },
+                            '100%': { transform: 'translateY(-100px) rotate(360deg)', opacity: 0 },
+                        },
+                        twinkle: {
+                            '0%, 100%': { opacity: 0.2 },
+                            '50%': { opacity: 1 },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #FF1493, #4dccff); border-radius: 4px; }
+        body { 
+            background-color: #050505; 
+            overflow-x: hidden;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF1493' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") 12 12, auto;
+        }
+        
+        /* Glass Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Polaroid Photo Style - IMPROVED */
+        .polaroid {
+            background: white;
+            padding: 15px 15px 50px 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transition: all 0.4s ease;
+            transform-origin: center;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .polaroid:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            z-index: 50;
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Slide Transition */
+        .slide {
+            display: none;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.6s ease-in-out;
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Countdown Box Style */
+        .timer-box {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Floating Hearts Background - IMPROVED */
+        .floating-heart {
+            position: absolute;
+            color: rgba(255, 20, 147, 0.3);
+            animation: floatHeart linear infinite;
+            bottom: -50px;
+            z-index: 0;
+            pointer-events: none;
+            font-size: 24px;
+        }
+
+        /* Small hearts for continuous background */
+        .small-heart {
+            position: absolute;
+            color: rgba(77, 204, 255, 0.2);
+            animation: floatSmallHeart linear infinite;
+            pointer-events: none;
+            font-size: 16px;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes floatSmallHeart {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Stars Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite;
+        }
+
+        /* Firecracker particle */
+        .firecracker-particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Fancy Button */
+        .fancy-btn {
+            background: linear-gradient(45deg, #FF1493, #4dccff);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+/* Memory Photo Container */
+.photo-container {
+    width: 100%;
+    height: 220px; /* Fixed height for container */
+    overflow: hidden;
+    border-radius: 5px;
+    background: #050505; /* Changed to match dark background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.memory-photo {
+    display: block;
+    transition: all 0.3s ease;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Specific adjustments for each photo based on dimensions */
+.photo-holi { /* 313 x 427 (portrait) */
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-abhi { /* 1280 x 960 (landscape) */
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.photo-gussa { /* 739 x 1600 (portrait) */
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%; /* Adjust to focus on face */
+}
+
+.photo-hasi { /* 444 x 940 (portrait) */
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%; /* Adjust to focus on face */
+}
+
+.photo-smile { /* 591 x 1280 (portrait) */
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%; /* Adjust to focus on face */
+}
+
+/* Polaroid Photo Style - IMPROVED */
+.polaroid {
+    background: white;
+    padding: 12px 12px 45px 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    transition: all 0.4s ease;
+    transform-origin: center;
+    width: 100%;
+    max-width: 260px; /* Slightly reduced */
+    margin: 0 auto;
+    height: 320px; /* Fixed height for polaroid */
+    display: flex;
+    flex-direction: column;
+}
+
+.polaroid:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    z-index: 50;
+    box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+}
+
+.polaroid:hover .memory-photo {
+    transform: scale(1.08); /* Slightly stronger zoom on hover */
+}
+
+.polaroid p {
+    margin-top: auto; /* Push caption to bottom */
+    padding-top: 10px;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .photo-container {
+        height: 180px;
+    }
+    
+    .polaroid {
+        max-width: 220px;
+        height: 280px;
+        padding: 10px 10px 40px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-container {
+        height: 150px;
+    }
+    
+    .polaroid {
+        max-width: 190px;
+        height: 250px;
+        padding: 8px 8px 35px 8px;
+    }
+    
+    .polaroid p {
+        font-size: 18px;
+    }
+}
+    </style>
+</head>
+<body class="text-moon h-screen w-screen flex flex-col items-center justify-center relative">
+
+    <!-- Stars Background -->
+    <div class="stars" id="starsContainer"></div>
+    
+    <!-- Floating Hearts Container -->
+    <div id="hearts-container" class="absolute inset-0 z-0 pointer-events-none overflow-hidden"></div>
+    
+    <!-- Small Hearts Container -->
+    <div id="small-hearts-container" class="absolute inset-0 z-0 pointer-events-none overflow-hidden"></div>
+    
+    <!-- Canvas for Fireworks -->
+    <canvas id="fireworks" class="absolute inset-0 z-1 pointer-events-none"></canvas>
+
+    <!-- Music Toggle -->
+    <button id="musicBtn" class="fixed top-6 right-6 z-50 p-3 rounded-full glass border border-white/20 text-white/70 hover:text-lovepink hover:border-lovepink transition-all duration-300 group">
+        <i data-lucide="music" class="w-6 h-6"></i>
+        <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Background Music</span>
+    </button>
+    <audio id="bgMusic" loop>
+        <source src="Saiyaara - Kishore Kumar (Lyrics) Haaye main mar hi jaaun Lyricsgenree.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Page Counter -->
+    <div class="fixed top-6 left-6 z-50 glass px-4 py-2 rounded-full text-sm font-clean">
+        <span id="currentPage">1</span>/<span id="totalPages">11</span>
+    </div>
+
+    <!-- SLIDE 1: INTRO -->
+    <div id="slide1" class="slide active absolute inset-0 flex-col items-center justify-center text-center p-6 z-10">
+        <div class="text-7xl mb-6 animate-float">
+            <span class="animate-pulse-slow">☀️</span>
+            <span class="text-4xl text-lovepink animate-heartbeat mx-4">❤️</span>
+            <span class="animate-float" style="animation-delay: 0.5s">🌙</span>
+        </div>
+        <h1 class="font-bold text-6xl md:text-8xl text-white mb-6 animate-slide-up">
+            <span class="text-mansiblue">Mansi</span> 
+            <span class="text-gold">&</span> 
+            <span class="text-white">Me</span>
+        </h1>
+        <p class="font-hand text-3xl text-gray-400 animate-slide-up" style="animation-delay: 0.2s;">
+            Kuch batein jo main bol nahi pata...<br>
+            Aaj likh kar bata raha hu.
+        </p>
+    </div>
+
+    <!-- SLIDE 2: 7 YEARS -->
+    <div id="slide2" class="slide absolute inset-0 flex-col items-center justify-center text-center p-6 z-10">
+        <h2 class="font-bold text-5xl text-gold mb-8 animate-pop-in">7 Saal Ka Safar...</h2>
+        <div class="glass p-8 rounded-2xl max-w-md animate-slide-up">
+            <p class="font-hand text-2xl text-gray-200 leading-relaxed">
+                8th class se lekar aaj tak. <br>
+                Pata hi nahi chala kab hum dost se yahan tak a gaye. <br>
+                Hum opposites hain like Sun and Moon, par shayad isliye perfect hain.
+            </p>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: TOPPER vs DUFFER -->
+    <div id="slide3" class="slide absolute inset-0 flex-col items-center justify-center text-center p-6 z-10">
+        <h2 class="font-bold text-4xl mb-8 text-white">Topper aur Duffer 📚</h2>
+        <div class="glass p-10 rounded-2xl max-w-lg text-left border-l-4 border-lovepink animate-slide-up">
+            <p class="font-clean text-xl mb-6 text-gray-300">
+                Tum padhai meine hoshiyar ho, hamesha top karti ho. <br>
+                Main thoda bekar hu padhai mein (Duffer hu 😅).
+            </p>
+            <p class="font-hand text-3xl text-white mt-4">
+                Mujhe kitabein zyada samajh nahi aati, <br>
+                Par mujhe <span class="text-gold font-bold">Tum</span> samajh aati ho.
+            </p>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: OUR DAY -->
+    <div id="slide4" class="slide absolute inset-0 flex-col items-center justify-center text-center p-6 z-10">
+        <div class="animate-heartbeat">
+            <h1 class="font-bold text-7xl md:text-9xl text-white tracking-tighter mb-4 text-shadow-lg shadow-[0_0_30px_rgba(255,20,147,0.5)]">10.12.25</h1>
+        </div>
+        <p class="font-hand text-3xl text-gold mt-4 animate-float">Humara Din.</p>
+        <p class="font-clean text-gray-500 mt-2">(Sabse best din)</p>
+    </div>
+
+    <!-- SLIDE 5: MANSI'S TRAITS -->
+    <div id="slide5" class="slide absolute inset-0 flex-col items-center justify-center text-center p-6 z-10">
+        <h2 class="font-bold text-4xl mb-10 text-lovepink tracking-wide">Mansi Ki Batein</h2>
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl w-full px-4">
+            <div class="glass p-8 rounded-2xl text-left hover:bg-white/10 transition-colors animate-slide-up" style="animation-delay: 0.1s;">
+                <h3 class="font-bold text-2xl text-white mb-3 flex items-center gap-2">😡 Tumhara Gussa</h3>
+                <p class="font-hand text-2xl text-gray-300">Choti choti baton pe chidh jati ho, par woh bhi kitna pyari lagta hai.</p>
+            </div>
+            <div class="glass p-8 rounded-2xl text-left hover:bg-white/10 transition-colors animate-slide-up" style="animation-delay: 0.3s;">
+                <h3 class="font-bold text-2xl text-white mb-3 flex items-center gap-2">🧠 Overthinking Queen</h3>
+                <p class="font-hand text-2xl text-gray-300">Har choti si baat ko leke tension, fir guilt feel karna. Relax karo meri jaan!</p>
+            </div>
+        </div>
+        <div class="mt-10 glass p-4 rounded-full border border-gold/30 animate-pop-in" style="animation-delay: 0.5s;">
+            <p class="font-clean text-lg text-gold font-bold">Suno Mansi, guilt mat liya karo. Main hu na sambhalne ke liye.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: STABILITY -->
+    <div id="slide6" class="slide absolute inset-0 flex-col items-center justify-center text-center p-6 z-10">
+        <h2 class="font-bold text-5xl mb-8 text-gold font-hand">Just Stability</h2>
+        <div class="glass p-10 rounded-2xl max-w-2xl animate-slide-up">
+            <p class="font-clean text-xl text-gray-300 mb-8 leading-relaxed">
+                Mujhe pata hai tumhe filmy romance, Vaisi bate aur cheesy baatein pasand nahi hain. Tumhe wo sab <span class="text-lovepink font-bold">uncomfortable</span> karta hai.
+            </p>
+            <div class="border-l-4 border-gold pl-6 text-left">
+                <p class="font-hand text-4xl text-white">
+                    Isliye main promise karta hu:<br>
+                    <span class="text-gray-400 text-2xl">No Drama. No Pressure. Go with the flow.</span><br>
+                    <span class="text-gold">Sirf Sukoon. Sirf Hum.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: MEMORIES - UPDATED WITH YOUR PHOTOS -->
+    <div id="slide7" class="slide absolute inset-0 flex-col items-center justify-center text-center p-6 z-10">
+        <h2 class="font-bold text-4xl mb-10 text-white">Humari Yaadein 📸</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 max-w-5xl w-full px-4">
+            <!-- Photo 1: Purani Yaadein (313 x 427) -->
+            <div class="polaroid rotate-[-3deg] animate-pop-in">
+                <div class="photo-container">
+                    <img src="1 Holi.jpg" 
+                         alt="Purani Yaadein" 
+                         class="memory-photo photo-holi"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/313x427/333/fff?text=Holi+Memories'">
+                </div>
+                <p class="text-black font-hand text-xl mt-3 font-bold">Purani Yaadein</p>
+            </div>
+            
+            <!-- Photo 2: Ab Hum (1280 x 960) -->
+            <div class="polaroid rotate-[2deg] animate-pop-in">
+                <div class="photo-container">
+                    <img src="5 Abhi.jpeg" 
+                         alt="Ab Hum" 
+                         class="memory-photo photo-abhi"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/1280x960/333/fff?text=Ab+Hum'">
+                </div>
+                <p class="text-black font-hand text-xl mt-3 font-bold">Ab Hum</p>
+            </div>
+            
+            <!-- Photo 3: Tera Gussa (739 x 1600) -->
+            <div class="polaroid rotate-[-2deg] animate-pop-in">
+                <div class="photo-container">
+                    <img src="2.jpeg" 
+                         alt="Tera Gussa" 
+                         class="memory-photo photo-gussa"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/739x1600/333/fff?text=Tera+Gussa'">
+                </div>
+                <p class="text-black font-hand text-xl mt-3 font-bold">Tera Gussa 😠</p>
+            </div>
+            
+            <!-- Photo 4: Tumari Hasi (444 x 940) -->
+            <div class="polaroid rotate-[3deg] animate-pop-in">
+                <div class="photo-container">
+                    <img src="4 Hasi.jpeg" 
+                         alt="Tumari Hasi" 
+                         class="memory-photo photo-hasi"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/444x940/333/fff?text=Tumari+Hasi'">
+                </div>
+                <p class="text-black font-hand text-xl mt-3 font-bold">Tumari Hasi 😄</p>
+            </div>
+            
+            <!-- Photo 5: Tumari Smile (591 x 1280) -->
+            <div class="polaroid rotate-[-1deg] animate-pop-in">
+                <div class="photo-container">
+                    <img src="3 Smile.jpeg" 
+                         alt="Tumari Smile" 
+                         class="memory-photo photo-smile"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/591x1280/333/fff?text=Tumari+Smile'">
+                </div>
+                <p class="text-black font-hand text-xl mt-3 font-bold">Tumari Smile 😊</p>
+            </div>
+            
+            <!-- Extra placeholder for layout -->
+            <div class="polaroid rotate-[1deg] animate-pop-in hidden md:block">
+                <div class="w-full h-48 bg-gradient-to-br from-gold/20 to-black rounded-lg flex items-center justify-center">
+                    <span class="font-hand text-2xl text-white">More Memories 💖</span>
+                </div>
+                <p class="text-black font-hand text-xl mt-3 font-bold">More to Come</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: LOVE LETTER -->
+    <div id="slide8" class="slide absolute inset-0 flex-col items-center justify-center text-center p-6 z-10">
+        <div class="glass w-full max-w-3xl p-10 rounded-xl text-left bg-dark/80 border border-white/10 shadow-2xl animate-slide-up">
+            <p class="font-hand text-3xl mb-6 text-lovepink font-bold">Dear Mansi,</p>
+            <div class="space-y-4 font-clean text-lg md:text-xl text-gray-300 leading-relaxed">
+                <p>Mujhe tumhari tarah apni feelings khulkar express karna nahi aata. Main thoda chup rahne wala aur introvert hu, jaise tum janti ho.</p>
+                <p>Lekin yeh mat samajhna ki main mehsoos nahi karta. Mere andar bhi wahi jazbaat hain, bas unhein shabdon mein bayaan karna mere liye aasan nahi hai.</p>
+                <p class="font-bold text-white mt-6">Thank you for being you. Thank you for being real. Thank you for choosing me.</p>
+            </div>
+            <p class="font-hand text-3xl mt-8 text-right text-gold">Hamesha tumhara,<br>Tera Surya ❤️</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: COUNTDOWN -->
+    <div id="slide9" class="slide absolute inset-0 flex-col items-center justify-center text-center p-6 z-10">
+        <h2 class="font-bold text-4xl mb-8 text-white animate-bounce">Bas Thodi Der Aur... ⏳</h2>
+        <div class="grid grid-cols-4 gap-4 md:gap-8 max-w-4xl text-center">
+            <div class="timer-box p-4 md:p-6 rounded-xl flex flex-col items-center"><span id="days" class="text-4xl md:text-6xl font-bold text-gold">00</span><span class="text-sm md:text-xl text-gray-400 font-clean uppercase">Days</span></div>
+            <div class="timer-box p-4 md:p-6 rounded-xl flex flex-col items-center"><span id="hours" class="text-4xl md:text-6xl font-bold text-white">00</span><span class="text-sm md:text-xl text-gray-400 font-clean uppercase">Hrs</span></div>
+            <div class="timer-box p-4 md:p-6 rounded-xl flex flex-col items-center"><span id="minutes" class="text-4xl md:text-6xl font-bold text-white">00</span><span class="text-sm md:text-xl text-gray-400 font-clean uppercase">Min</span></div>
+            <div class="timer-box p-4 md:p-6 rounded-xl flex flex-col items-center"><span id="seconds" class="text-4xl md:text-6xl font-bold text-lovepink animate-pulse-slow">00</span><span class="text-sm md:text-xl text-gray-400 font-clean uppercase">Sec</span></div>
+        </div>
+        <p class="mt-12 font-hand text-3xl text-gray-300">Humare Pehle New Year Ke Liye! 🥂</p>
+    </div>
+
+    <!-- SLIDE 10: NEW YEAR -->
+    <div id="slide10" class="slide absolute inset-0 flex-col items-center justify-center text-center p-6 z-10">
+        <h1 class="font-bold text-9xl text-gold mb-6 animate-pulse-slow drop-shadow-[0_0_30px_rgba(255,215,0,0.7)]">2026</h1>
+        <h2 class="font-clean text-4xl text-white mb-8">Happy New Year Mansi</h2>
+        <div class="glass p-6 rounded-full px-10">
+            <p class="font-hand text-2xl text-gray-300">Is saal bhi main tumhara dimaag khata rahunga.<br>Aur tumhari baate sunta rahunga.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 11: I LOVE YOU -->
+    <div id="slide11" class="slide absolute inset-0 flex-col items-center justify-center text-center p-6 z-10">
+        <div class="text-8xl mb-8 text-lovepink animate-heartbeat">❤️</div>
+        <h1 class="font-bold text-6xl text-white mb-4">I Love You</h1>
+        <p class="font-clean text-2xl text-gray-500 tracking-widest uppercase">Forever & Always.</p>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="fixed bottom-10 z-50 w-full flex justify-center gap-4">
+        <button onclick="nextSlide()" id="nextBtn" class="fancy-btn backdrop-blur-md border border-white/30 text-white px-10 py-3 rounded-full font-bold text-xl hover:from-white hover:to-gold hover:text-black transition-all duration-300 shadow-[0_0_20px_rgba(255,20,147,0.3)] hover:scale-105 active:scale-95">
+            Start Journey 🚀
+        </button>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Initialize Variables
+        let currentSlide = 1;
+        const totalSlides = 11;
+        const btn = document.getElementById('nextBtn');
+        const currentPageEl = document.getElementById('currentPage');
+        const totalPagesEl = document.getElementById('totalPages');
+        
+        totalPagesEl.textContent = totalSlides;
+
+        // 1. CREATE STARS BACKGROUND
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.opacity = Math.random() * 0.5 + 0.2;
+                star.style.setProperty('--duration', Math.random() * 5 + 3 + 's');
+                star.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        // 2. FLOATING HEARTS LOGIC (Improved - Continuous background hearts)
+        function createFloatingHearts() {
+            const container = document.getElementById('hearts-container');
+            const smallContainer = document.getElementById('small-hearts-container');
+            
+            // Create big floating hearts
+            function addBigHeart() {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.classList.add('floating-heart');
+                
+                // Randomize position and animation
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 10 + 15) + 's'; // 15s to 25s
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                heart.style.fontSize = (Math.random() * 25 + 20) + 'px'; // 20px to 45px
+                heart.style.color = Math.random() > 0.5 ? 'rgba(255, 20, 147, 0.4)' : 'rgba(77, 204, 255, 0.4)';
+                
+                container.appendChild(heart);
+                
+                // Remove heart after animation completes
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.remove();
+                    }
+                }, parseFloat(heart.style.animationDuration) * 1000);
+            }
+            
+            // Create small floating hearts
+            function addSmallHeart() {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.classList.add('small-heart');
+                
+                // Randomize position and animation
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 8 + 12) + 's'; // 12s to 20s
+                heart.style.animationDelay = (Math.random() * 3) + 's';
+                heart.style.fontSize = (Math.random() * 15 + 10) + 'px'; // 10px to 25px
+                heart.style.color = Math.random() > 0.5 ? 'rgba(255, 20, 147, 0.2)' : 'rgba(77, 204, 255, 0.2)';
+                
+                smallContainer.appendChild(heart);
+                
+                // Remove heart after animation completes
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.remove();
+                    }
+                }, parseFloat(heart.style.animationDuration) * 1000);
+            }
+            
+            // Create initial hearts
+            for(let i = 0; i < 8; i++) {
+                setTimeout(addBigHeart, i * 800);
+            }
+            
+            for(let i = 0; i < 15; i++) {
+                setTimeout(addSmallHeart, i * 400);
+            }
+            
+            // Keep adding hearts continuously
+            setInterval(addBigHeart, 2000);
+            setInterval(addSmallHeart, 800);
+        }
+
+        // 3. SLIDE FUNCTIONS
+        function showSlide(n) {
+            // Hide all slides
+            document.querySelectorAll('.slide').forEach(el => {
+                el.classList.remove('active');
+                setTimeout(() => { 
+                    if(!el.classList.contains('active')) el.style.display = 'none'; 
+                }, 500);
+            });
+            
+            // Show current slide
+            const activeEl = document.getElementById(`slide${n}`);
+            activeEl.style.display = 'flex';
+            setTimeout(() => activeEl.classList.add('active'), 50);
+
+            // Update page indicator
+            currentPageEl.textContent = n;
+            
+            // Update button text
+            updateButtonText(n);
+            
+            // Special effects for specific slides
+            if (n === 1) {
+                startHeartRain();
+            } else if (n === 9) {
+                startCountdown();
+            } else if (n === 10) { 
+                startFireworks(); // Start fireworks on New Year slide
+                createFirecrackerExplosion();
+            } else if (n === 11) {
+                createHeartExplosion();
+            } else {
+                stopFireworks();
+            }
+        }
+
+        function updateButtonText(n) {
+            const texts = {
+                1: "Start Journey 🚀",
+                2: "Continue Story 📖",
+                3: "Next ➡️",
+                4: "Our Special Day 💕",
+                5: "Mansi's Traits ✨",
+                6: "Next ➡️",
+                7: "Memories 📸",
+                8: "Love Letter 💌",
+                9: "Countdown ⏳",
+                10: "New Year 🎊",
+                11: "Start Again 🔄"
+            };
+            btn.innerText = texts[n] || "Next ➡️";
+        }
+
+        function nextSlide() {
+            if (currentSlide === totalSlides) {
+                currentSlide = 1;
+            } else {
+                currentSlide++;
+            }
+            showSlide(currentSlide);
+        }
+
+        // 4. COUNTDOWN TO NEW YEAR 2026
+        function updateCountdown() {
+            const now = new Date();
+            const newYear = new Date('January 1, 2026 00:00:00');
+            const diff = newYear - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                return;
+            }
+
+            const d = Math.floor(diff / 1000 / 60 / 60 / 24);
+            const h = Math.floor(diff / 1000 / 60 / 60) % 24;
+            const m = Math.floor(diff / 1000 / 60) % 60;
+            const s = Math.floor(diff / 1000) % 60;
+
+            document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+            document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+            document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+            document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+        }
+
+        let countdownInterval;
+        function startCountdown() {
+            updateCountdown();
+            if (countdownInterval) clearInterval(countdownInterval);
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        // 5. MUSIC CONTROL
+        const musicBtn = document.getElementById('musicBtn');
+        const audio = document.getElementById('bgMusic');
+        let isPlaying = false;
+        let musicIcon;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                musicIcon = lucide.createIcon('music', musicBtn.querySelector('i'));
+                musicBtn.style.borderColor = "rgba(255,255,255,0.2)";
+                musicBtn.style.color = "rgba(255,255,255,0.7)";
+            } else {
+                audio.play().catch(e => console.log("Audio play failed:", e));
+                musicIcon = lucide.createIcon('volume-2', musicBtn.querySelector('i'));
+                musicBtn.style.borderColor = "#4dccff";
+                musicBtn.style.color = "#4dccff";
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // 6. FIREWORKS ENGINE (Improved)
+        const fireworksCanvas = document.getElementById('fireworks');
+        const ctx = fireworksCanvas.getContext('2d');
+        let particles = [];
+        let animationId;
+
+        function resizeCanvas() { 
+            fireworksCanvas.width = window.innerWidth; 
+            fireworksCanvas.height = window.innerHeight; 
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function createFireworkParticle(x, y, color) {
+            const colors = color || ['#FFD700', '#FF1493', '#4dccff', '#FFFFFF'];
+            const particleColor = Array.isArray(colors) ? colors[Math.floor(Math.random() * colors.length)] : colors;
+            
+            for(let i = 0; i < 60; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 8 + 3;
+                particles.push({
+                    x: x, 
+                    y: y,
+                    color: particleColor,
+                    radius: Math.random() * 4 + 1,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    alpha: 1,
+                    decay: Math.random() * 0.02 + 0.01,
+                    gravity: 0.05
+                });
+            }
+        }
+
+        function animateFireworks() {
+            animationId = requestAnimationFrame(animateFireworks);
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.1)';
+            ctx.fillRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+            
+            // Create random explosions on New Year slide
+            if (currentSlide === 10 && Math.random() < 0.08) { 
+                createFireworkParticle(
+                    Math.random() * fireworksCanvas.width, 
+                    Math.random() * fireworksCanvas.height * 0.6
+                ); 
+            }
+            
+            // Update and draw particles
+            particles.forEach((p, index) => {
+                p.x += p.vx; 
+                p.y += p.vy; 
+                p.vy += p.gravity; 
+                p.alpha -= p.decay;
+                
+                if (p.alpha <= 0) { 
+                    particles.splice(index, 1); 
+                } else { 
+                    ctx.globalAlpha = p.alpha; 
+                    ctx.fillStyle = p.color; 
+                    ctx.beginPath(); 
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); 
+                    ctx.fill(); 
+                }
+            });
+        }
+
+        function startFireworks() { 
+            if (!animationId) animateFireworks(); 
+            // Create initial burst
+            for(let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createFireworkParticle(
+                        fireworksCanvas.width/2 + (Math.random()-0.5)*200,
+                        fireworksCanvas.height/2 + (Math.random()-0.5)*200
+                    );
+                }, i * 300);
+            }
+        }
+        
+        function stopFireworks() { 
+            if (animationId) { 
+                cancelAnimationFrame(animationId); 
+                animationId = null; 
+                ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height); 
+                particles = []; 
+            } 
+        }
+
+        // 7. FIRECRACKER EXPLOSION (Special for New Year)
+        function createFirecrackerExplosion() {
+            const colors = ['#FF1493', '#FFD700', '#4dccff', '#FFFFFF', '#00FF00'];
+            
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    
+                    for(let j = 0; j < 40; j++) {
+                        const particle = document.createElement('div');
+                        particle.classList.add('firecracker-particle');
+                        particle.style.left = x + 'px';
+                        particle.style.top = y + 'px';
+                        particle.style.width = Math.random() * 6 + 2 + 'px';
+                        particle.style.height = particle.style.width;
+                        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        particle.style.boxShadow = `0 0 10px ${particle.style.backgroundColor}`;
+                        document.body.appendChild(particle);
+                        
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = Math.random() * 150 + 50;
+                        
+                        particle.animate([
+                            { 
+                                transform: 'translate(0, 0) scale(1)',
+                                opacity: 1
+                            },
+                            { 
+                                transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+                                opacity: 0
+                            }
+                        ], {
+                            duration: 1500,
+                            easing: 'ease-out'
+                        });
+                        
+                        setTimeout(() => {
+                            if (particle.parentNode) particle.remove();
+                        }, 1500);
+                    }
+                }, i * 100);
+            }
+        }
+
+        // 8. HEART EXPLOSION
+        function createHeartExplosion() {
+            for(let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.style.position = 'fixed';
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+                    heart.style.color = Math.random() > 0.5 ? '#FF1493' : '#4dccff';
+                    heart.textContent = '❤️';
+                    heart.style.zIndex = '9999';
+                    heart.style.pointerEvents = 'none';
+                    document.body.appendChild(heart);
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 300 + 100;
+                    
+                    heart.animate([
+                        { 
+                            transform: 'translate(-50%, -50%) scale(1)',
+                            opacity: 1
+                        },
+                        { 
+                            transform: `translate(${Math.cos(angle) * distance - 50}px, ${Math.sin(angle) * distance - 50}px) scale(0)`,
+                            opacity: 0
+                        }
+                    ], {
+                        duration: 1500,
+                        easing: 'ease-out'
+                    });
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) heart.remove();
+                    }, 1500);
+                }, i * 30);
+            }
+        }
+
+        // 9. HEART RAIN
+        let heartRainInterval;
+        function startHeartRain() {
+            if (heartRainInterval) clearInterval(heartRainInterval);
+            heartRainInterval = setInterval(() => {
+                if (Math.random() > 0.5) {
+                    const heart = document.createElement('div');
+                    heart.classList.add('floating-heart');
+                    heart.textContent = Math.random() > 0.5 ? '❤️' : '💖';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+                    heart.style.animationDuration = Math.random() * 8 + 7 + 's';
+                    heart.style.color = Math.random() > 0.5 ? 'rgba(255, 20, 147, 0.4)' : 'rgba(77, 204, 255, 0.4)';
+                    document.getElementById('hearts-container').appendChild(heart);
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) heart.remove();
+                    }, parseFloat(heart.style.animationDuration) * 1000);
+                }
+            }, 800);
+        }
+
+        // 10. KEYBOARD NAVIGATION
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                if (currentSlide === 1) currentSlide = totalSlides + 1;
+                currentSlide--;
+                showSlide(currentSlide);
+            } else if (e.key === 'Escape') {
+                currentSlide = 1;
+                showSlide(currentSlide);
+            }
+        });
+
+        // 11. INITIALIZE EVERYTHING
+        window.addEventListener('load', () => {
+            createStars();
+            createFloatingHearts(); // Start continuous heart animation
+            showSlide(1);
+            
+            // Auto-play music after user interaction
+            document.body.addEventListener('click', () => {
+                if (!isPlaying) {
+                    audio.play().catch(e => console.log("Audio autoplay prevented"));
+                }
+            }, { once: true });
+            
+        });
+
+    </script>
+    
+</body>
+</html>
